@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-  const { data } = useSuspenseQuery(convexQuery(api.feeds.get, {}));
+  const { data } = useSuspenseQuery(convexQuery(api.feeds.getFeeds, {}));
 
   console.log({ data })
 

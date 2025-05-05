@@ -1,7 +1,7 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
-export const get = query({
+export const getFeeds = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("feeds").collect();
