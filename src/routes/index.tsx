@@ -8,10 +8,6 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-  const { data } = useSuspenseQuery(convexQuery(api.feeds.getFeeds, {}));
-
-  console.log({ data })
-
   return (
     <div className="p-2">
       <h3>Welcome Home!!!</h3>

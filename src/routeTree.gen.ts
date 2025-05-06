@@ -11,8 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
 import { Route as RedirectImport } from './routes/redirect'
-import { Route as DeferredImport } from './routes/deferred'
 import { Route as PathlessLayoutImport } from './routes/_pathlessLayout'
 import { Route as UsersRouteImport } from './routes/users.route'
 import { Route as PostsRouteImport } from './routes/posts.route'
@@ -28,15 +28,15 @@ import { Route as PathlessLayoutNestedLayoutRouteAImport } from './routes/_pathl
 
 // Create/Update Routes
 
-const RedirectRoute = RedirectImport.update({
-  id: '/redirect',
-  path: '/redirect',
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DeferredRoute = DeferredImport.update({
-  id: '/deferred',
-  path: '/deferred',
+const RedirectRoute = RedirectImport.update({
+  id: '/redirect',
+  path: '/redirect',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -146,18 +146,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PathlessLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/deferred': {
-      id: '/deferred'
-      path: '/deferred'
-      fullPath: '/deferred'
-      preLoaderRoute: typeof DeferredImport
-      parentRoute: typeof rootRoute
-    }
     '/redirect': {
       id: '/redirect'
       path: '/redirect'
       fullPath: '/redirect'
       preLoaderRoute: typeof RedirectImport
+      parentRoute: typeof rootRoute
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
       parentRoute: typeof rootRoute
     }
     '/_pathlessLayout/_nested-layout': {
@@ -284,8 +284,8 @@ export interface FileRoutesByFullPath {
   '/posts': typeof PostsRouteRouteWithChildren
   '/users': typeof UsersRouteRouteWithChildren
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
-  '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/settings': typeof SettingsRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -298,8 +298,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
-  '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/settings': typeof SettingsRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts': typeof PostsIndexRoute
@@ -315,8 +315,8 @@ export interface FileRoutesById {
   '/posts': typeof PostsRouteRouteWithChildren
   '/users': typeof UsersRouteRouteWithChildren
   '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
-  '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/settings': typeof SettingsRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
@@ -334,8 +334,8 @@ export interface FileRouteTypes {
     | '/posts'
     | '/users'
     | ''
-    | '/deferred'
     | '/redirect'
+    | '/settings'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -347,8 +347,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
-    | '/deferred'
     | '/redirect'
+    | '/settings'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts'
@@ -362,8 +362,8 @@ export interface FileRouteTypes {
     | '/posts'
     | '/users'
     | '/_pathlessLayout'
-    | '/deferred'
     | '/redirect'
+    | '/settings'
     | '/_pathlessLayout/_nested-layout'
     | '/posts/$postId'
     | '/users/$userId'
@@ -380,8 +380,8 @@ export interface RootRouteChildren {
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
   UsersRouteRoute: typeof UsersRouteRouteWithChildren
   PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
-  DeferredRoute: typeof DeferredRoute
   RedirectRoute: typeof RedirectRoute
+  SettingsRoute: typeof SettingsRoute
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 
@@ -390,8 +390,8 @@ const rootRouteChildren: RootRouteChildren = {
   PostsRouteRoute: PostsRouteRouteWithChildren,
   UsersRouteRoute: UsersRouteRouteWithChildren,
   PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
-  DeferredRoute: DeferredRoute,
   RedirectRoute: RedirectRoute,
+  SettingsRoute: SettingsRoute,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }
 
@@ -409,8 +409,8 @@ export const routeTree = rootRoute
         "/posts",
         "/users",
         "/_pathlessLayout",
-        "/deferred",
         "/redirect",
+        "/settings",
         "/posts_/$postId/deep"
       ]
     },
@@ -437,11 +437,11 @@ export const routeTree = rootRoute
         "/_pathlessLayout/_nested-layout"
       ]
     },
-    "/deferred": {
-      "filePath": "deferred.tsx"
-    },
     "/redirect": {
       "filePath": "redirect.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.tsx"
     },
     "/_pathlessLayout/_nested-layout": {
       "filePath": "_pathlessLayout/_nested-layout.tsx",
